@@ -1,17 +1,17 @@
 %{
     #include "y.tab.h"
-    #include <stdlib.c>
+    #include <stdlib.h>
 }%
 
 %%
 
 [0-9]+\.[0-9]+ { // floating points
-    yytval = atof(yytext);
+    yylval = atof(yytext);
     return NUMBER;
 }
 
 [0-9]+ { // integers
-    yytval = atoi(yytext);
+    yylval = atoi(yytext);
     return NUMBER;
 }
 
@@ -28,12 +28,12 @@
 [ \t\n]+; // ignoring white spaces
 
 . { // invalid error
-    printf("invalid expression: %s\n", yytext())
+    printf("invalid expression: %s\n", yytext)
     return 0;
 } 
 
 %%
 
 int yywrap() { // EOF
-    return 1
+    return 1;
 }
