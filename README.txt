@@ -1,7 +1,7 @@
 How to run
 
     lex calculator.l
-    yacc -d calculator.d
+    yacc -d calculator.y
     gcc lex.yy.c y.tab.c -o calculator -lm
     ./calculator
 
