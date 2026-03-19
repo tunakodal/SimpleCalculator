@@ -24,21 +24,14 @@
 %%
 
 input:
-      /* empty */
-    | input line
-    ;
-
-line:
-      expr '\n' { printf("result: %lf\n", $1); }
-    | '\n'
-    ;
+    expr { printf("\nResult: %lf\n", $1); }
 
 expr : expr PLUS expr { $$ = $1 + $3; } 
      | expr MINUS expr { $$ = $1 - $3; }
      | expr TIMES expr { $$ = $1 * $3; }
      | expr DIVIDE expr {
         if($3 == 0) {
-            yyerror("division by zero");
+            yyerror("\ndivision by zero");
             YYABORT;
         }
         else {
