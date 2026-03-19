@@ -26,9 +26,9 @@
 "/" { return DIVIDE; }
 "(" { return LPAREN; }
 ")" { return RPAREN; }
-\n  { return '\n'; } // catching pressing of enter
 
-[ \t\n]+ {} // ignoring white spaces
+\n  { return '\n'; } // catching pressing enter
+[ \t]+ {} // ignore whitespaces 
 
 . { // invalid error
     printf("invalid expression: %s\n", yytext);
