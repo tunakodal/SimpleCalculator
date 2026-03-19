@@ -27,7 +27,7 @@
 "(" { return LPAREN; }
 ")" { return RPAREN; }
 
-\n  { return '\n'; } // catching pressing enter
+\n  { return '\n'; } // catching pressing enter --> not used in this position
 [ \t]+ {} // ignore whitespaces 
 
 . { // invalid error
