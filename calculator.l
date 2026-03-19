@@ -31,8 +31,8 @@
 [ \t]+ {} // ignore whitespaces 
 
 . { // invalid error
-    printf("invalid expression: %s\n", yytext);
-    yyerror("invalid expression");
+    printf("\n%s - ", yytext);
+    yyerror(" invalid expression");
 } 
 
 

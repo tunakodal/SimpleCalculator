@@ -30,14 +30,37 @@ Test cases
 2 + 5 * 3
 Result: 17.000000
 
+-
+
 (2 + 5) * 3
 Result: 21.000000
+
+-
 
 (2^4) / (2^2) * 3
 Result: 12.000000
 
+-
+
 (5 / 2) * (9 / 3) + 2
 Result: 9.500000
 
+-
+
 5 /     0
 division by zero
+
+-
+
+abc
+a -  invalid expression
+
+b -  invalid expression
+
+c -  invalid expression
+syntax error
+
+-
+
+2 - - 
+syntax error
