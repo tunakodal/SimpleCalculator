@@ -1,6 +1,8 @@
 %{
     #include "y.tab.h"
     #include <stdlib.h>
+    #include <stdio.h>
+    int yyerror(char *s);
 }%
 
 %%
@@ -11,7 +13,7 @@
 }
 
 [0-9]+ { // integers
-    yylval = atoi(yytext);
+    yylval = atof(yytext);
     return NUMBER;
 }
 
@@ -28,8 +30,8 @@
 [ \t\n]+; // ignoring white spaces
 
 . { // invalid error
-    printf("invalid expression: %s\n", yytext)
-    return 0;
+    printf("invalid expression: %s\n", yytext);
+    yyerror("invalid expression");
 } 
 
 %%
