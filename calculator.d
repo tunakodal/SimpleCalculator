@@ -1,25 +1,36 @@
 %{
     #include "y.tab.h"
     #include <stdio.h>
-    #include <stdlib.h>
+    #include <stdlib.h>    
     #include <math.h>
-}%
+    int yyerror(char *s);
+    int yylex(void);
+%}
 
 %union {
     double val;
 }
 
 %token <val> NUMBER
-%token NUMBER PLUS MINUS TIMES DIVIDE LPAREN RPAREN EXP
+%token PLUS MINUS TIMES DIVIDE LPAREN RPAREN EXP
 %type <val> expr
 
 %left PLUS MINUS
 %left TIMES DIVIDE
 %right EXP
 
+%start input
+
 %%
+
 input:
-      expr { printf("result: %lf\n", $1); }
+      /* empty */
+    | input line
+    ;
+
+line:
+      expr '\n' { printf("result: %lf\n", $1); }
+    | '\n'
     ;
 
 expr : expr PLUS expr { $$ = $1 + $3; } 
@@ -36,15 +47,17 @@ expr : expr PLUS expr { $$ = $1 + $3; }
      }
      | expr EXP expr { $$ = pow($1,$3); }
      | LPAREN expr RPAREN { $$ = $2; }
-     | NUMBER { $$ = $1; };
+     | NUMBER { $$ = $1; }
+     ;
 
 %%
 
 int main() {
-    return yyparse();
+    yyparse();
+    return 0;
 }
 
 int yyerror(char *s) {
-    printf("Error: %s\n", s);
+    printf("%s\n", s);
     return 0;
 }

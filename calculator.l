@@ -3,17 +3,17 @@
     #include <stdlib.h>
     #include <stdio.h>
     int yyerror(char *s);
-}%
+%}
 
 %%
 
 [0-9]+\.[0-9]+ { // floating points
-    yylval = atof(yytext);
+    yylval.val = atof(yytext);
     return NUMBER;
 }
 
 [0-9]+ { // integers
-    yylval = atof(yytext);
+    yylval.val = atof(yytext);
     return NUMBER;
 }
 
@@ -26,13 +26,15 @@
 "/" { return DIVIDE; }
 "(" { return LPAREN; }
 ")" { return RPAREN; }
+\n  { return '\n'; } // catching pressing of enter
 
-[ \t\n]+; // ignoring white spaces
+[ \t\n]+ {} // ignoring white spaces
 
 . { // invalid error
     printf("invalid expression: %s\n", yytext);
     yyerror("invalid expression");
 } 
+
 
 %%
 
